@@ -17,14 +17,9 @@ int main() {
     skipList.insert(4);
     skipList.insert(6);
     skipList.insert(7);
-    skipList.insert(10);
-    skipList.insert(11);
+    skipList.insert(8);
     skipList.insert(9);
-    skipList.insert(100);
-    skipList.insert(18);
-    skipList.insert(12);
-    skipList.insert(13);
-    skipList.insert(14);
+    skipList.insert(10);
     skipList.print();
     delimiter();
     printf("Search(x): \n");
@@ -35,6 +30,18 @@ int main() {
     else {
         std::cout << std::endl << p->data << std::endl;
     }
+    delimiter();
+    skipList.remove(10);
+    skipList.remove(9);
+    skipList.remove(8);
+    //skipList.remove(7);
+    //skipList.remove(6);
+    //skipList.remove(5);
+    //skipList.remove(4);
+    //skipList.remove(3);
+    //skipList.remove(2);
+    //skipList.remove(1);
+    skipList.print();
     delimiter();
     return 0;
 }

@@ -39,6 +39,32 @@ void SkipList::insert(int val)
 		}
 }
 
+void SkipList::remove(int val)
+{
+	SkipListNode* current = head;
+	SkipListNode* update[MAX_LEVEL + 1];
+	memset(update, 0, sizeof(SkipListNode*) * (MAX_LEVEL + 1));
+
+	for (int i = level; i >= 0; i--) {
+		while (current->forward[i] != nullptr && current->forward[i]->data < val) {
+			current = current->forward[i];
+		}
+		update[i] = current;
+	}
+	current = current->forward[0];
+	if (current && current->data == val) {
+		for (int i = 0; i <= level; i++) {
+			if (update[i]->forward[i] == current) {
+				update[i]->forward[i] = current->forward[i];
+			}
+			while (level > 0 && head->forward[level] == nullptr) {
+				level--;
+			}
+		}
+	}
+	delete current;
+}
+
 
 SkipListNode* SkipList::search(int val)
 {
@@ -51,7 +77,7 @@ SkipListNode* SkipList::search(int val)
 	}
 	current = current->forward[0];
 
-	if (current->data == val) {
+	if (current && current->data == val) {
 		return current;
 	}
 	else {
